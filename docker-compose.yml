@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    volumes:
+      - ./gateway:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///db.sqlite3
+    depends_on:
+      - auth_service
+      - student_service
+      - staff_service
+      - curriculum_service
+      - finance_service
+      - notification_service
+
+  auth_service:
+    build: ./auth_service
+    container_name: auth_service
+    volumes:
+      - ./auth_service:/app
+    ports:
+      - "8001:8000"
+    environment:
+      - DATABASE_URL=sqlite:///db.sqlite3
+
+  student_service:
+    build: ./student_service
+    container_name: student_service
+    volumes:
+      - ./student_service:/app
+    ports:
+      - "8002:8000"
+    environment:
+      - DATABASE_URL=sqlite:///db.sqlite3
+
+  staff_service:
+    build: ./staff_service
+    container_name: staff_service
+    volumes:
+      - ./staff_service:/app
+    ports:
+      - "8003:8000"
+    environment:
+      - DATABASE_URL=sqlite:///db.sqlite3
+
+  curriculum_service:
+    build: ./curriculum_service
+    container_name: curriculum_service
+    volumes:
+      - ./curriculum_service:/app
+    ports:
+      - "8004:8000"
+    environment:
+      - DATABASE_URL=sqlite:///db.sqlite3
+
+  finance_service:
+    build: ./finance_service
+    container_name: finance_service
+    volumes:
+      - ./finance_service:/app
+    ports:
+      - "8005:8000"
+    environment:
+      - DATABASE_URL=sqlite:///db.sqlite3
+
+  notification_service:
+    build: ./notification_service
+    container_name: notification_service
+    volumes:
+      - ./notification_service:/app
+    ports:
+      - "8006:8000"
+    environment:
+      - DATABASE_URL=sqlite:///db.sqlite3
